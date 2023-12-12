@@ -1,0 +1,23 @@
+version: '2.1'
+services:
+  besu-node-0:
+    user: root
+    container_name: besu-node-0
+    volumes:
+      - ../node/besu-0/data:/opt/besu/data
+      - ../genesis:/opt/besu/genesis
+    image: hyperledger/besu:latest
+    entrypoint:
+      - /bin/bash
+      - -c
+      - besu --data-path=data --genesis-file=genesis/genesis.json --min-gas-price=0 --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT --host-allowlist="*" --rpc-http-cors-origins="all"
+    ports:
+      - "8545:8545"
+      - "30303:30303"
+    networks:
+      besu_network:
+    restart: always
+
+networks:
+  besu_network:
+    external: true

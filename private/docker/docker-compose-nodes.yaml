@@ -1,0 +1,57 @@
+version: '2.1'
+services:
+  besu-node-1:
+    user: root
+    container_name: besu-node-1
+    volumes:
+      - ../node/besu-1/data:/opt/besu/data
+      - ../genesis:/opt/besu/genesis
+    image: hyperledger/besu:latest
+    entrypoint:
+      - /bin/bash
+      - -c
+      - besu --data-path=data --genesis-file=genesis/genesis.json --bootnodes=enode://3e13335918febf7e146f8bfb67a00efc03525c486b8e88195a35dc2343c21f2f139a8aa5caac08856633cda7ebecb5a0bc8056e72720008e2c1479cd02426695@172.20.0.2:30303 --p2p-port=30304 --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT --host-allowlist="*" --rpc-http-cors-origins="all" --rpc-http-port=8546
+    ports:
+      - "8546:8546"
+      - "30304:30304"
+    networks:
+      besu_network:
+    restart: always
+  besu-node-2:
+    user: root
+    container_name: besu-node-2
+    volumes:
+      - ../node/besu-2/data:/opt/besu/data
+      - ../genesis:/opt/besu/genesis
+    image: hyperledger/besu:latest
+    entrypoint:
+      - /bin/bash
+      - -c
+      - besu --data-path=data --genesis-file=genesis/genesis.json --bootnodes=enode://3e13335918febf7e146f8bfb67a00efc03525c486b8e88195a35dc2343c21f2f139a8aa5caac08856633cda7ebecb5a0bc8056e72720008e2c1479cd02426695@172.20.0.2:30303 --p2p-port=30305 --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT --host-allowlist="*" --rpc-http-cors-origins="all" --rpc-http-port=8547
+    ports:
+      - "8547:8547"
+      - "30305:30305"
+    networks:
+      besu_network:
+    restart: always
+  besu-node-3:
+    user: root
+    container_name: besu-node-3
+    volumes:
+      - ../node/besu-3/data:/opt/besu/data
+      - ../genesis:/opt/besu/genesis
+    image: hyperledger/besu:latest
+    entrypoint:
+      - /bin/bash
+      - -c
+      - besu --data-path=data --genesis-file=genesis/genesis.json --bootnodes=enode://3e13335918febf7e146f8bfb67a00efc03525c486b8e88195a35dc2343c21f2f139a8aa5caac08856633cda7ebecb5a0bc8056e72720008e2c1479cd02426695@172.20.0.2:30303 --p2p-port=30306 --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT --host-allowlist="*" --rpc-http-cors-origins="all" --rpc-http-port=8548
+    ports:
+      - "8548:8548"
+      - "30306:30306"
+    networks:
+      besu_network:
+    restart: always
+
+networks:
+  besu_network:
+    external: true

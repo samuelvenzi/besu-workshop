@@ -1,0 +1,16 @@
+
+# besu
+private/node/besu-0/data
+private/node/besu-1/data
+private/node/besu-2/data
+private/node/besu-3/data
+
+private/genesis
+
+private/contracts/node_modules
+
+private/contracts/build/contracts
+
+.DS_Store
+
+tmp
