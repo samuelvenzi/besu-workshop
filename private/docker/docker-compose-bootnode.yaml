@@ -10,10 +10,11 @@ services:
     entrypoint:
       - /bin/bash
       - -c
-      - besu --data-path=data --genesis-file=genesis/genesis.json --min-gas-price=0 --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT --host-allowlist="*" --rpc-http-cors-origins="all"
+      - besu --data-path=data --genesis-file=genesis/genesis.json --min-gas-price=0 --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT --host-allowlist="*" --rpc-http-cors-origins="all" --metrics-enabled --metrics-host=besu-node-0
     ports:
       - "8545:8545"
       - "30303:30303"
+      - "9545:9545"
     networks:
       besu_network:
     restart: always

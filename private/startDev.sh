@@ -120,11 +120,3 @@ sleep 5
 echo "Deploying contract..."
 
 truffle migrate --f 1 --to 1 --network development
-
-# Fetch contract address
-export CONTRACT_ADDRESS=$(cat build/contracts/GoLedgerToken.json | jq -r '.networks | to_entries | .[0].value.address')
-echo "Contract address: $CONTRACT_ADDRESS"
-
-sed "s/<TOKEN_CONTRACT_ADDRESS>/$CONTRACT_ADDRESS/g" migrations/templates/2_deploy_contract.js > migrations/2_deploy_contract.js
-
-truffle migrate --f 2 --to 2 --network development
